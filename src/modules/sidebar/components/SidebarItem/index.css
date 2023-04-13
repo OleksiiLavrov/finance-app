@@ -1,0 +1,31 @@
+.menu-item.active {
+  position: relative;
+}
+.menu-item.active::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  z-index: 2;
+  right: 0;
+  width: 7px;
+  height: 100%;
+  border-radius: 4px 0 0 4px;
+  transform: translateY(-50%);
+  background-color: #facc15;
+}
+
+.menu-item svg {
+  fill: rgb(156 163 175);
+}
+
+.menu-item span {
+  color: rgb(156 163 175);
+}
+
+.menu-item.active svg {
+  fill: #facc15;
+}
+
+.menu-item.active span {
+  color: #facc15;
+}

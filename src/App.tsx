@@ -1,26 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { Outlet } from "react-router-dom";
+import { Sidebar } from "./modules/sidebar";
+export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="overflow-x-hidden">
+      <div className="h-full w-24 fixed top-0 left-0 group/menu peer/menu bg-gray-800 duration-300 hover:w-60">
+        <Sidebar />
+      </div>
+      <div className="translate-x-24 pl-10 pr-60 peer-hover/menu:translate-x-60 duration-300">
+        <Outlet />
+      </div>
     </div>
   );
-}
-
-export default App;
+};
