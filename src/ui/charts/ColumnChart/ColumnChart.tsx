@@ -1,92 +1,121 @@
+import { ApexOptions } from "apexcharts";
 import ReactApexChart from "react-apexcharts";
 
-export const ColumnChart = () => {
-  const data = {
-    series: [
-      {
-        name: "Inflation",
-        data: [2.3, 3.1, 4.0, 6.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2],
+export const ColumnChart = (props: { height: number }) => {
+  const series = [
+    {
+      name: "Total per day",
+      data: [
+        -40, 40, -70, 160, -56, 125, -80, 40, -70, 160, -80, 40, -70, 160, 40,
+        -70, 160, -80,
+      ],
+    },
+  ];
+  const options: ApexOptions = {
+    chart: {
+      id: "bar",
+      toolbar: {
+        show: false,
       },
-    ],
-    options: {
-      chart: {
-        id: "bar",
-        toolbar: {
-          show: false,
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 3,
+        columnWidth: "100%",
+        dataLabels: {
+          position: "top",
         },
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 10,
-          dataLabels: {
-            position: "top", // top, center, bottom
-          },
-        },
-      },
-      dataLabels: {
-        enabled: true,
-        offsetY: -20,
-        style: {
-          fontSize: "12px",
-          colors: ["#304758"],
-        },
-      },
-
-      xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-        position: "top",
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        crosshairs: {
-          fill: {
-            type: "gradient",
-            gradient: {
-              colorFrom: "#D8E3F0",
-              colorTo: "#BED1E6",
-              stops: [0, 100],
-              opacityFrom: 0.4,
-              opacityTo: 0.5,
+        colors: {
+          ranges: [
+            {
+              from: -200,
+              to: -1,
+              color: "#EF4444",
             },
-          },
-        },
-        tooltip: {
-          enabled: true,
+            {
+              from: 1,
+              to: 200,
+              color: "#22C55E",
+            },
+          ],
         },
       },
-      title: {
-        text: "Monthly Inflation in Argentina, 2002",
-        floating: true,
+    },
+    colors: ["#FACC15"],
+    dataLabels: {
+      enabled: false,
+    },
+    xaxis: {
+      categories: [
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+      ],
+      axisBorder: {
+        show: false,
+      },
+      labels: {
+        offsetY: 4,
         style: {
-          color: "#444",
+          colors: "#A9A9A9",
+          fontSize: "16px",
+          fontWeight: 600,
         },
       },
+    },
+    yaxis: {
+      labels: {
+        offsetX: -6,
+        style: {
+          colors: ["#A9A9A9"],
+          fontSize: "16px",
+          fontWeight: 600,
+        },
+      },
+    },
+    title: {
+      text: "Total income per day",
+      margin: 40,
+      offsetX: 9,
+      style: {
+        fontSize: "24px",
+        fontWeight: 600,
+        color: "#ffffff",
+      },
+    },
+    grid: {
+      borderColor: "#9A9A9A",
+      strokeDashArray: 6,
+    },
+    tooltip: {
+      style: {
+        fontSize: "16px",
+      },
+      theme: "dark",
     },
   };
 
   return (
     <ReactApexChart
-      options={data.options}
-      series={data.series}
+      options={options}
+      series={series}
       type={"bar"}
-      height={350}
-      width={500}
+      height={props.height}
     />
   );
 };

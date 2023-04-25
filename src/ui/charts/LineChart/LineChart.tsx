@@ -1,41 +1,118 @@
 import Chart from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
 
-export const LineChart = () => {
-  const data = {
-    options: {
-      chart: {
-        id: "basic-bar",
-        toolbar: {
-          show: false,
-        },
+export const LineChart = (props: { height: number }) => {
+  const series = [
+    {
+      name: "Balance",
+      data: [2.3, 3.1, 4.0, 5.9, 4.0, 3.6, 3.2],
+    },
+  ];
+
+  const options: ApexOptions = {
+    chart: {
+      id: "basic-bar",
+      toolbar: {
+        show: false,
       },
-      xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+    },
+    stroke: {
+      curve: "smooth",
+    },
+    xaxis: {
+      categories: [
+        "01/04",
+        "02/04",
+        "03/04",
+        "04/04",
+        "05/04",
+        "06/04",
+        "07/04",
+      ],
+      axisBorder: {
+        show: false,
       },
-      markers: {
-        size: 5,
-        hover: {
-          size: 7,
+      labels: {
+        offsetY: 4,
+        style: {
+          colors: [
+            "#A9A9A9",
+            "#A9A9A9",
+            "#A9A9A9",
+            "#A9A9A9",
+            "#A9A9A9",
+            "#A9A9A9",
+            "#A9A9A9",
+            "#A9A9A9",
+          ],
+          fontSize: "16px",
+          fontWeight: 600,
         },
       },
     },
-    series: [
-      {
-        name: "series-1",
-        data: [30, 40, 45, 50, 49, 60, 70, 91],
+    yaxis: {
+      labels: {
+        offsetX: -6,
+        style: {
+          colors: ["#A9A9A9"],
+          fontSize: "16px",
+          fontWeight: 600,
+        },
       },
-      {
-        name: "series-2",
-        data: [40, 50, 55, 60, 70, 65, 80, 100],
+    },
+    colors: ["#facc15"],
+    markers: {
+      size: 4,
+      hover: {
+        size: 7,
       },
-    ],
+    },
+    legend: {
+      show: true,
+      position: "top",
+      horizontalAlign: "center",
+      fontSize: "16px",
+      fontWeight: 600,
+      offsetY: -75,
+      labels: {
+        colors: "#A9A9A9",
+      },
+      markers: {
+        offsetX: -4,
+        offsetY: -1,
+      },
+      itemMargin: {
+        horizontal: 10,
+      },
+    },
+    grid: {
+      borderColor: "#9A9A9A",
+      strokeDashArray: 6,
+    },
+    title: {
+      text: "Balance",
+      margin: 50,
+      offsetX: 5,
+      style: {
+        fontSize: "30px",
+        fontWeight: 600,
+        color: "#ffffff",
+      },
+    },
+    tooltip: {
+      style: {
+        fontSize: "16px",
+      },
+      theme: "dark",
+    },
   };
+
   return (
     <Chart
-      options={data.options}
-      series={data.series}
-      type="line"
-      width="500"
+      options={options}
+      series={series}
+      type="area"
+      height={props.height}
     />
   );
 };
