@@ -1,6 +1,6 @@
-import { IconSvgSelector } from "../../../../../assets/icons/IconSvgSelector";
+import { IconSvgSelector } from "../../../../assets/icons/IconSvgSelector";
 
-export const Transaction = (props: { transaction?: any }) => {
+export const TransactionsItem = (props: { transaction?: any }) => {
   return (
     <li className="flex items-center justify-between pb-3 border-b-2 border-gray-700 mt-4">
       <div className="flex items-center">

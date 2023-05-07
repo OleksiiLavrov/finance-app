@@ -1,5 +1,5 @@
-export { Tab } from "./Tab/Tab";
 export { CreditCards } from "./CreditCards/CreditCards";
-export { Chart } from "./Chart/Chart";
+export { AreaChart } from "./AreaChart/AreaChart";
 export { Transactions } from "./Transactions/Transactions";
 export { Categories } from "./Categories/Categories";
+export { Tabs } from "./Tabs/Tabs";

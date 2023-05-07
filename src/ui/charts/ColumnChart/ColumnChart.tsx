@@ -93,7 +93,7 @@ export const ColumnChart = (props: { height: number }) => {
       margin: 40,
       offsetX: 9,
       style: {
-        fontSize: "24px",
+        fontSize: "30px",
         fontWeight: 600,
         color: "#ffffff",
       },

@@ -1,5 +1,5 @@
-import { IconSvgSelector } from "../../../../../assets/icons/IconSvgSelector";
-import { capitalizeString } from "../../../../../helpers/capitalizeString";
+import { IconSvgSelector } from "../../../../assets/icons/IconSvgSelector";
+import { capitalizeString } from "../../../../helpers/capitalizeString";
 
 export const CategoriesItem = (props: {
   icon: string;

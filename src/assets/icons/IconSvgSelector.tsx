@@ -182,7 +182,7 @@ export const IconSvgSelector = (props: { icon: string; classname: string }) => {
     case "dashboard-mastercard":
       return (
         <svg
-          enable-background="new 0 0 32 20"
+          enableBackground="new 0 0 32 20"
           height="20"
           overflow="visible"
           viewBox="0 0 32 20"

@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "./modules/sidebar";
-export const App: React.FC = () => {
+import { Sidebar } from "./modules";
+export const App = () => {
   return (
-    <div className="bg-gray-900 overflow-x-hidden">
+    <div className="bg-gray-900 h-screen overflow-x-hidden">
       <div className="bg-gray-800 my-0 mx-auto 3xl:w-2000 3xl:relative">
         <div className="w-24 h-full 3xl:w-60 3xl:absolute fixed top-0 left-0 group/menu peer/menu bg-gray-900 duration-300 hover:w-60">
           <Sidebar />

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import { CategoriesItem } from "./CategoriesItem/CategoriesItem";
+import { CategoriesItem } from "../../ui/CategoriesItem/CategoriesItem";
 
 export const Categories = () => {
   return (
-    <div className="bg-gray-800 rounded-lg p-5 w-2/5">
+    <div className="bg-gray-800 rounded-lg p-5 w-5/12">
       <div className="flex justify-between items-center mb-7">
         <h3 className="text-3xl font-semibold">Categories</h3>
         <Link
-          to="/wallet"
+          to="/analytics"
           className="text-yellow-400 text-lg font-regular duration-300 hover:text-yellow-500 hover:duration-300"
         >
           Manage
