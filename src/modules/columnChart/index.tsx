@@ -1,8 +1,8 @@
-import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import Chart from "react-apexcharts";
 import { defaultOptions } from "./options";
 
-export const AreaChartModule = (props: {
+export const ColumnChartModule = (props: {
   height: number;
   options?: ApexOptions;
   data: ApexAxisChartSeries;
@@ -11,7 +11,7 @@ export const AreaChartModule = (props: {
     <Chart
       options={{ ...defaultOptions, ...props.options }}
       series={props.data}
-      type="area"
+      type={"bar"}
       height={props.height}
     />
   );

@@ -1,7 +1,10 @@
 import axios from "axios";
-import moment from "moment";
 import React, { useEffect, useState } from "react";
 import $api from "./http/api";
+import { useStore } from "./store";
+import { ClientService } from "./http/services/ClientService";
+import { useGlobalStore } from "./globalStore";
+import { Transaction } from "./types/globalTypes";
 
 type ClientInfo = {
   accounts: Array<AccountInfo>;
@@ -34,42 +37,52 @@ type JarInfo = {
 };
 
 export const Example: React.FC = () => {
-  const [transactions, setTransactions] = useState<any[]>();
+  // const [transactions, setTransactions] = useState<any[]>();
+
+  const { bears, increasePopulation } = useStore();
+  const { getInfo, transactions, clientInfo } = useGlobalStore();
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
-  const fetchData = async () => {
-    if (localStorage.getItem("transactions")) {
-      const transactions = JSON.parse(
-        localStorage.getItem("transactions") || "{}"
-      );
-      console.log(transactions);
+  // const fetchData = async () => {
+  //   // if (localStorage.getItem("transactions")) {
+  //   //   const transactions = JSON.parse(
+  //   //     localStorage.getItem("transactions") || "{}"
+  //   //   );
+  //   //   console.log(transactions);
 
-      setTransactions(transactions);
-    } else {
-      const clientInfo: ClientInfo = (await $api.get("/client-info")).data;
-      const transactions = (
-        await $api.get(
-          `/statement/${clientInfo.accounts[0].id}/1678442447/1681120847`
-        )
-      ).data;
-      console.log(transactions);
+  //   //   setTransactions(transactions);
+  //   // } else {
+  //   // const clientInfo: ClientInfo = await ClientService.getClientInfo();
+  //   const clientInfo: ClientInfo = (await $api.get("/client-info")).data;
+  //   const transactions = (
+  //     await $api.get(
+  //       `/statement/${clientInfo.accounts[0].id}/1678442447/1681120847`
+  //     )
+  //   ).data;
+  //   console.log(transactions);
 
-      setTransactions(transactions);
-      localStorage.setItem("transactions", JSON.stringify(transactions));
-    }
+  //   setTransactions(transactions);
+  //   localStorage.setItem("transactions", JSON.stringify(transactions));
+  //   // }
+  // };
+
+  const clickHandler = () => {
+    increasePopulation();
+    getInfo();
   };
 
   return (
     <div>
+      <button onClick={clickHandler}>Increase</button>
+      <p>{bears}</p>
       {transactions &&
-        transactions.map((item: any, index: number) => {
-          const time = moment.unix(item.time).format("LLL");
+        transactions.map((item: Transaction, index: number) => {
           return (
-            <p key={time + index}>
-              {time} - {item.description}
+            <p key={index}>
+              {item.description} - {item.amount}
             </p>
           );
         })}

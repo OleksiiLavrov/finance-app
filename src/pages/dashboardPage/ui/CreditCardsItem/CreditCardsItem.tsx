@@ -1,9 +1,8 @@
 import { IconSvgSelector } from "../../../../assets/icons/IconSvgSelector";
+import { convertAmount } from "../../../../helpers/convertAmout";
 
-export const CreditCardsItem = (props: {
-  cardInfo?: any;
-  balance?: number;
-}) => {
+export const CreditCardsItem = (props: { cardInfo?: any; balance: number }) => {
+  const balance = convertAmount(props.balance);
   return (
     <div className="rounded-lg bg-gray-900">
       <div className="p-6 flex justify-between items-start">
@@ -24,7 +23,9 @@ export const CreditCardsItem = (props: {
             <span className="text-gray-500 text-sm font-semibold">
               Total Balance
             </span>
-            <span className="text-lg font-semibold">82,420 UAH</span>
+            <span className="text-lg font-semibold">
+              {balance.toLocaleString()} UAH
+            </span>
           </p>
           <p className="flex flex-col gap-2 uppercase">
             <span className="text-gray-500 text-sm font-semibold">

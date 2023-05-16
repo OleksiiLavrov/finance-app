@@ -1,6 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "./modules";
+import { useEffect } from "react";
+import { useGlobalStore } from "./globalStore";
 export const App = () => {
+  const getClientInfo = useGlobalStore((state) => state.getInfo);
+  useEffect(() => {
+    getClientInfo();
+  });
   return (
     <div className="bg-gray-900 h-screen overflow-x-hidden">
       <div className="bg-gray-800 my-0 mx-auto 3xl:w-2000 3xl:relative">

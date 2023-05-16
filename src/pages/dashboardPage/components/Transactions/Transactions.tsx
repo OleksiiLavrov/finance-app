@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { TransactionsItem } from "../../ui";
+import { useGlobalStore } from "../../../../globalStore";
+import { Transaction } from "../../../../types/globalTypes";
 
 export const Transactions = () => {
+  const transactions = useGlobalStore((state) => state.transactions);
   return (
     <div className="bg-gray-800 rounded-lg px-10 py-6 w-full">
       <div className="flex justify-between items-center mb-7">
@@ -14,14 +17,14 @@ export const Transactions = () => {
         </Link>
       </div>
       <ul>
-        <TransactionsItem />
-        <TransactionsItem />
-        <TransactionsItem />
-        <TransactionsItem />
-        <TransactionsItem />
-        <TransactionsItem />
-        <TransactionsItem />
-        <TransactionsItem />
+        {transactions.map((transaction: Transaction, id: number) => {
+          if (id < 8)
+            return (
+              <li key={transaction.id}>
+                <TransactionsItem transaction={transaction} />
+              </li>
+            );
+        })}
       </ul>
     </div>
   );

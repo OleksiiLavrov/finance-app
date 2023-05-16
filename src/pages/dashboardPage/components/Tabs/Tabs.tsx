@@ -1,12 +1,20 @@
+import { useGlobalStore } from "../../../../globalStore";
 import { TabsItem } from "../../ui";
+import { countAmount } from "../../utils/countAmount";
 
 export const Tabs = () => {
+  const clientInfo = useGlobalStore((state) => state.clientInfo);
+  const transactions = useGlobalStore((state) => state.transactions);
+
   return (
-    <div className="flex justify-between">
-      <TabsItem tabItem="Balance" amount={41210} />
-      <TabsItem tabItem="Income" amount={41210} />
-      <TabsItem tabItem="Expenses" amount={41210} />
-      <TabsItem tabItem="Savings" amount={41210} />
+    <div className="flex justify-between gap-6">
+      <TabsItem tabItem="Balance" amount={clientInfo!.accounts[0].balance} />
+      <TabsItem tabItem="Income" amount={countAmount.income(transactions)} />
+      <TabsItem tabItem="Expenses" amount={countAmount.outcome(transactions)} />
+      <TabsItem
+        tabItem="Savings"
+        amount={countAmount.savings(clientInfo!.jars)}
+      />
     </div>
   );
 };

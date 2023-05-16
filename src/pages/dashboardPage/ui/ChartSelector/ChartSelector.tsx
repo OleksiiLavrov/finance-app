@@ -7,8 +7,9 @@ export const ChartSelector = (props: {
       <select
         className="px-3 py-2 bg-gray-800 rounded-lg w-28 text-gray-400"
         onChange={props.changeHandler}
+        defaultValue="Weekly"
       >
-        <option className="w-32" selected value="Weekly">
+        <option className="w-32" value="Weekly">
           Weekly
         </option>
         <option className="w-32" value="Monthly">

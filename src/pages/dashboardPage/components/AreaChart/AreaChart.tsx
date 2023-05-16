@@ -1,11 +1,10 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { ChartSelector } from "../../ui/ChartSelector/ChartSelector";
 import { chartType } from "../../consts/chartType";
 import { AreaChartModule } from "../../../../modules";
 
 export const AreaChart = () => {
   const [chart, setChart] = useState(chartType.weekly);
-
   const storedData = [
     {
       name: "Balance",
