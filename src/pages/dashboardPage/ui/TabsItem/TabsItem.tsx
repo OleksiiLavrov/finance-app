@@ -12,8 +12,10 @@ export const TabsItem = (props: { tabItem: string; amount: number }) => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <span className="text-gray-400">{props.tabItem}</span>
-        <span className="text-3xl font-semibold">
+        <span data-testid="tab-title" className="text-gray-400">
+          {props.tabItem}
+        </span>
+        <span data-testid="tab-amount" className="text-3xl font-semibold">
           {convertedAmount.toLocaleString()}₴
         </span>
       </div>
