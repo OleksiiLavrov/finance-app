@@ -5,12 +5,8 @@ import { ErrorBoundary } from "react-error-boundary";
 const FallbackComponent = () => <div>Loading...</div>;
 
 const DataComponent = () => {
-   const data = clientService.clientInfo.read();
-   return (
-      <>
-         <div>{data.name}</div>
-      </>
-   );
+   // const data = clientService.clientInfo.read();
+   return <>{/* <div>{data.name}</div> */}Example</>;
 };
 
 export const Example = () => {

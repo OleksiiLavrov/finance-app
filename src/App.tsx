@@ -1,9 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "./modules";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorComponent } from "./ui/Error/Error";
 import { useEffect } from "react";
-import { useGlobalStore } from "./globalStore";
+import { useGlobalStore } from "./globalStore/store";
+
 export const App = () => {
-   const getClientInfo = useGlobalStore((state) => state.getInfo);
+   const getClientInfo = useGlobalStore((state) => state.getClientInfo);
    useEffect(() => {
       getClientInfo();
    }, []);
@@ -14,7 +17,9 @@ export const App = () => {
                <Sidebar />
             </div>
             <div className="translate-x-24 3xl:translate-x-60 pr-24 3xl:pr-52 text-white peer-hover/menu:translate-x-60 peer-hover/menu:pr-52 duration-300">
-               <Outlet />
+               <ErrorBoundary FallbackComponent={ErrorComponent}>
+                  <Outlet />
+               </ErrorBoundary>
             </div>
          </div>
       </div>
