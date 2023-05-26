@@ -3,31 +3,35 @@ import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
 import { ChartInfo } from "../../../types/globalTypes";
 import { useGlobalStore } from "../../../globalStore/store";
-import { balancePerDay } from "../utils/balancePerDay";
+import { totalIncomePerDay } from "../utils/totalPerDay";
+
 interface IStore {
-   areaChartInfo: ChartInfo;
+   columnChartInfo: ChartInfo;
    setInfo: (period: number) => ChartInfo;
 }
 
-export const useChartsStore = create<IStore>()(
+export const useChartStore = create<IStore>()(
    devtools(
       immer((set, get) => ({
-         areaChartInfo: {
-            name: "Balance",
+         columnChartInfo: {
+            name: "Total Income Per Day",
             yAxis: [],
             xAxis: [],
          },
          setInfo: (period) => {
             const transactions = useGlobalStore.getState().transactions;
-            const { arrBalance, arrDate } = balancePerDay(transactions, period);
+            const { arrTotal, arrDate } = totalIncomePerDay(
+               transactions,
+               period
+            );
             set((state) => ({
-               areaChartInfo: {
-                  name: state.areaChartInfo.name,
-                  yAxis: arrBalance,
+               columnChartInfo: {
+                  name: state.columnChartInfo.name,
+                  yAxis: arrTotal,
                   xAxis: arrDate,
                },
             }));
-            return get().areaChartInfo;
+            return get().columnChartInfo;
          },
       }))
    )

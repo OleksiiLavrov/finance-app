@@ -1,4 +1,4 @@
-import { ChartType } from "../../consts/chartType";
+import { ChartType } from "../../../../modules/areaChart/consts/chartType";
 
 export const ChartSelector = (props: {
    changeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;

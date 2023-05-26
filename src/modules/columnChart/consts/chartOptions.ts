@@ -1,4 +1,4 @@
-export const areaChartXAxisOptions = {
+export const columnChartXAxisOptions = {
    axisBorder: {
       show: false,
    },
@@ -11,5 +11,3 @@ export const areaChartXAxisOptions = {
       },
    },
 };
-
-export const columnChartXAxisOptions = {};

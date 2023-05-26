@@ -1,7 +1,7 @@
 import { PageTitle } from "../../ui";
 import { TransactionTable } from "./components/Table/Table";
 import { useGlobalStore } from "../../globalStore/store";
-import { balancePerDay } from "../dashboardPage/utils/balancePerDay";
+import { balancePerDay } from "../../modules/areaChart/utils/balancePerDay";
 
 export const TransactionPage = () => {
    const loading = useGlobalStore((state) => state.loading);

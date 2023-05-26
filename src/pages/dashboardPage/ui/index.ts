@@ -1,4 +1,3 @@
-export { ChartSelector } from "./ChartSelector/ChartSelector";
 export { TabsItem } from "./TabsItem/TabsItem";
 export { CreditCardsItem } from "./CreditCardsItem/CreditCardsItem";
 export { TransactionsItem } from "./TransactionsItem/TransactionsItem";

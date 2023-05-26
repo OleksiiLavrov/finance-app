@@ -1,12 +1,6 @@
 import { PageTitle } from "../../ui";
-import {
-   AreaChart,
-   CreditCards,
-   Categories,
-   Transactions,
-   Tabs,
-   ColumnChart,
-} from "./components";
+import { AreaChart, ColumnChart } from "../../modules";
+import { CreditCards, Categories, Transactions, Tabs } from "./components";
 import { useGlobalStore } from "../../globalStore/store";
 
 export const DashboardPage = () => {

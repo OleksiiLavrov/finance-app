@@ -1,3 +1,3 @@
-export { AreaChartModule } from "./areaChart";
-export { ColumnChartModule } from "./columnChart";
+export { AreaChart } from "./areaChart";
+export { ColumnChart } from "./columnChart";
 export { Sidebar } from "./sidebar";
