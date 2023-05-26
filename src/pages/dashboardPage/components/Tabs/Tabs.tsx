@@ -1,11 +1,10 @@
 import { useGlobalStore } from "../../../../globalStore/store";
-import { useTransactionsStore } from "../../store/transactions";
 import { TabsItem } from "../../ui";
 import { countAmount } from "../../utils/countAmount";
 
 export const Tabs = () => {
    const clientInfo = useGlobalStore((state) => state.clientInfo);
-   const transactions = useTransactionsStore((state) => state.transactions);
+   const transactions = useGlobalStore((state) => state.transactions);
 
    return (
       <div className="flex justify-between gap-6">

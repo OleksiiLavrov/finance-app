@@ -1,16 +1,12 @@
-import { useEffect } from "react";
 import { PageTitle } from "../../ui";
-import { useTransactionsStore } from "../dashboardPage/store/transactions";
 import { TransactionTable } from "./components/Table/Table";
+import { useGlobalStore } from "../../globalStore/store";
+import { balancePerDay } from "../dashboardPage/utils/balancePerDay";
 
 export const TransactionPage = () => {
-   const loading = useTransactionsStore((state) => state.loading);
-   const getTransactions = useTransactionsStore(
-      (state) => state.getTransactions
-   );
-   useEffect(() => {
-      getTransactions();
-   }, []);
+   const loading = useGlobalStore((state) => state.loading);
+   const transactions = useGlobalStore((state) => state.transactions);
+   balancePerDay(transactions, 20);
    return (
       <section className="bg-gray-600 min-h-screen">
          <PageTitle title="Transactions" />

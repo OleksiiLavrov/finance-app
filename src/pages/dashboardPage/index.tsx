@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { PageTitle } from "../../ui";
 import {
    AreaChart,
@@ -9,16 +7,10 @@ import {
    Tabs,
    ColumnChart,
 } from "./components";
-import { useTransactionsStore } from "./store/transactions";
+import { useGlobalStore } from "../../globalStore/store";
 
 export const DashboardPage = () => {
-   const loading = useTransactionsStore((state) => state.loading);
-   const getTransactions = useTransactionsStore(
-      (state) => state.getTransactions
-   );
-   useEffect(() => {
-      getTransactions();
-   }, []);
+   const loading = useGlobalStore((state) => state.loading);
    return (
       <section className="bg-gray-600 min-h-screen">
          <PageTitle title="Dashboard" />

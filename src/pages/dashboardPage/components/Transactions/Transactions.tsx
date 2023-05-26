@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import { TransactionsItem } from "../../ui";
 import { useGlobalStore } from "../../../../globalStore/store";
 import { Transaction } from "../../../../types/globalTypes";
-import { useTransactionsStore } from "../../store/transactions";
 
 export const Transactions = () => {
-   const transactions = useTransactionsStore((state) => state.transactions);
+   const transactions = useGlobalStore((state) => state.transactions);
    return (
       <div className="bg-gray-800 rounded-lg px-10 py-6 w-full">
          <div className="flex justify-between items-center mb-7">

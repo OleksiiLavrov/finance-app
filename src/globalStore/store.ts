@@ -6,24 +6,36 @@ import { clientService } from "../http/services/clientService";
 interface IGlobalStore {
    clientInfo: ClientInfo | null;
    loading: boolean;
-   getClientInfo: () => void;
+   transactions: Transaction[];
+   getInfo: () => void;
 }
 
 export const useGlobalStore = create<IGlobalStore>()(
    immer((set) => ({
       clientInfo: null,
       loading: true,
+      transactions: [],
 
-      getClientInfo: async () => {
+      getInfo: async () => {
+         set({ loading: true });
          try {
-            set({ loading: true });
-            const clientInfoResponse = await clientService.getClientInfo();
+            const monthAgo = new Date().setDate(new Date().getDate() - 30);
+            const clientInfoRes = await clientService.getClientInfo();
+            const requestArgs = {
+               id: clientInfoRes.accounts[0].id,
+               timeFrom: monthAgo,
+               timeTo: Date.now(),
+            };
+            const transactionsRes = await clientService.getTransactions(
+               requestArgs
+            );
             set({
-               clientInfo: clientInfoResponse,
+               clientInfo: clientInfoRes,
+               transactions: transactionsRes,
                loading: false,
             });
          } catch (error) {
-            console.log(error);
+            set({ loading: false });
          }
       },
    }))

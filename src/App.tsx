@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import { useGlobalStore } from "./globalStore/store";
 
 export const App = () => {
-   const getClientInfo = useGlobalStore((state) => state.getClientInfo);
+   const getInfo = useGlobalStore((state) => state.getInfo);
    useEffect(() => {
-      getClientInfo();
+      getInfo();
    }, []);
    return (
       <div className="bg-gray-900 h-screen overflow-x-hidden">

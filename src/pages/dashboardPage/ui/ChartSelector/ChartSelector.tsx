@@ -1,3 +1,5 @@
+import { ChartType } from "../../consts/chartType";
+
 export const ChartSelector = (props: {
    changeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }) => {
@@ -7,12 +9,12 @@ export const ChartSelector = (props: {
             data-testid="chart-selector"
             className="px-3 py-2 bg-gray-800 rounded-lg w-28 text-gray-400"
             onChange={props.changeHandler}
-            defaultValue="Weekly"
+            defaultValue={ChartType.Weekly}
          >
-            <option className="w-32" value="Weekly">
+            <option className="w-32" value={ChartType.Weekly}>
                Weekly
             </option>
-            <option className="w-32" value="Monthly">
+            <option className="w-32" value={ChartType.Monthly}>
                Monthly
             </option>
          </select>

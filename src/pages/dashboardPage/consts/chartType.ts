@@ -1,4 +1,4 @@
-export const chartType = {
-  weekly: "Weekly",
-  monthly: "Monthly",
-};
+export enum ChartType {
+   Weekly = 7,
+   Monthly = 30,
+}
