@@ -20,7 +20,10 @@ export const useChartStore = create<IStore>()(
          },
          setInfo: (period) => {
             const transactions = useGlobalStore.getState().transactions;
-            const { arrBalance, arrDate } = balancePerDay(transactions, period);
+            const { arrBalance, arrDate } = balancePerDay(
+               transactions!,
+               period
+            );
             set((state) => ({
                areaChartInfo: {
                   name: state.areaChartInfo.name,

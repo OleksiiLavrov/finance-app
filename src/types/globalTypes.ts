@@ -44,6 +44,10 @@ export type Transaction = {
    category?: string;
 };
 
+export type Categories = {
+   [categoryName: string]: string[];
+};
+
 export type ChartInfo = {
    name: string;
    yAxis: number[];

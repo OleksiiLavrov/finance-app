@@ -1,10 +1,10 @@
 import "./index.css";
-import { useGlobalStore } from "../../../../globalStore/store";
 import { CreditCardsItem } from "../../ui";
 import { countAmount } from "../../utils/countAmount";
+import { useInitialStore } from "../../../../globalStore/initialStore";
 
 export const CreditCards = () => {
-   const clientInfo = useGlobalStore((state) => state.clientInfo);
+   const clientInfo = useInitialStore((state) => state.clientInfo);
    const totalBalance =
       clientInfo!.accounts[0].balance + countAmount.savings(clientInfo!.jars);
    return (

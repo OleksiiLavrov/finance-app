@@ -1,51 +1,64 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { ClientInfo, Transaction } from "../types/globalTypes";
-import { clientService } from "../http/services/clientService";
+import { Categories, Transaction } from "../types/globalTypes";
+import { categoriesSetter } from "../helpers/categoriesSetter";
+import { categoriesChanger } from "../helpers/categoriesChanger";
 
 interface IGlobalStore {
-   clientInfo: ClientInfo | null;
-   loading: boolean;
-   transactions: Transaction[];
-   getInfo: () => void;
-   getTransactions: () => void;
+   transactions: Transaction[] | null;
+   categories: Categories;
+   getTransactions: (transactions: Transaction[]) => void;
+   getTransactionById: (id: string) => Transaction;
+   changeTransactionCategory: (
+      transaction: Transaction,
+      newCategory: string
+   ) => void;
 }
+
+const savedCategories = JSON.parse(
+   localStorage.getItem("transactionCategories")!
+);
 
 export const useGlobalStore = create<IGlobalStore>()(
    immer((set, get) => ({
-      clientInfo: null,
-      loading: true,
-      transactions: [],
+      transactions: null,
+      categories: savedCategories ? savedCategories : {},
 
-      getInfo: async () => {
-         set({ loading: true });
-         try {
-            const clientInfoRes = await clientService.getClientInfo();
-            set({ clientInfo: clientInfoRes });
-            get().getTransactions();
-         } catch (error) {
-            set({ loading: false });
-         }
+      getTransactions: (transactions) => {
+         const transactionsWithCategories = categoriesSetter(
+            transactions!,
+            get().categories
+         );
+         set({ transactions: transactionsWithCategories });
       },
 
-      getTransactions: async () => {
-         set({ loading: true });
-         try {
-            const monthAgo = new Date().setDate(new Date().getDate() - 30);
-            const requestArgs = {
-               id: get().clientInfo!.accounts[0].id,
-               timeFrom: monthAgo,
-               timeTo: Date.now(),
-            };
-            const transactionsRes = await clientService.getTransactions(
-               requestArgs
+      getTransactionById: (id) => {
+         return get().transactions!.find(
+            (transaction: Transaction) => transaction.id === id
+         )!;
+      },
+
+      changeTransactionCategory: (transaction, newCategory) => {
+         if (transaction.category !== newCategory) {
+            const updatedCategories = categoriesChanger(
+               transaction,
+               newCategory,
+               get().categories
             );
-            set({
-               transactions: transactionsRes,
-               loading: false,
+
+            localStorage.setItem(
+               "transactionCategories",
+               JSON.stringify(updatedCategories)
+            );
+
+            set((state) => {
+               state.categories = { ...updatedCategories };
             });
-         } catch (error) {
-            set({ loading: false });
+            const transactions = categoriesSetter(
+               [...get().transactions!],
+               get().categories
+            );
+            set({ transactions: transactions });
          }
       },
    }))

@@ -10,13 +10,19 @@ const DataComponent = () => {
 };
 
 export const Example = () => {
+   const obj = {
+      value: "str1",
+   };
    return (
       <>
-         <ErrorBoundary fallback={<h1>Error</h1>}>
-            <Suspense fallback={<FallbackComponent />}>
-               <DataComponent />
-            </Suspense>
-         </ErrorBoundary>
+         <button
+            onClick={() => {
+               obj.value = "str2";
+               console.log(obj);
+            }}
+         >
+            Clcik
+         </button>
       </>
    );
 };

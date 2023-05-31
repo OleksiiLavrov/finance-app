@@ -3,10 +3,10 @@ import { Sidebar } from "./modules";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorComponent } from "./ui/Error/Error";
 import { useEffect } from "react";
-import { useGlobalStore } from "./globalStore/store";
+import { useInitialStore } from "./globalStore/initialStore";
 
 export const App = () => {
-   const getInfo = useGlobalStore((state) => state.getInfo);
+   const getInfo = useInitialStore((state) => state.getInfo);
    useEffect(() => {
       getInfo();
    }, []);

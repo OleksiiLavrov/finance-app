@@ -21,7 +21,7 @@ export const useChartStore = create<IStore>()(
          setInfo: (period) => {
             const transactions = useGlobalStore.getState().transactions;
             const { arrTotal, arrDate } = totalIncomePerDay(
-               transactions,
+               transactions!,
                period
             );
             set((state) => ({

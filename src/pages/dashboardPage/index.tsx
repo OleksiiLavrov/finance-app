@@ -1,10 +1,10 @@
 import { PageTitle } from "../../ui";
 import { AreaChart, ColumnChart } from "../../modules";
 import { CreditCards, Categories, Transactions, Tabs } from "./components";
-import { useGlobalStore } from "../../globalStore/store";
+import { useInitialStore } from "../../globalStore/initialStore";
 
 export const DashboardPage = () => {
-   const loading = useGlobalStore((state) => state.loading);
+   const loading = useInitialStore((state) => state.loading);
    return (
       <section className="bg-gray-600 min-h-screen">
          <PageTitle title="Dashboard" />

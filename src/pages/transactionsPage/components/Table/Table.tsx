@@ -21,6 +21,8 @@ import { useGlobalStore } from "../../../../globalStore/store";
 import { timeConverter } from "../../../../helpers/unixTimeConverter";
 import { convertAmount } from "../../../../helpers/convertAmount";
 import { useNavigate } from "react-router";
+import { capitalizeString } from "../../../../helpers/capitalizeString";
+import { Transaction } from "../../../../types/globalTypes";
 
 interface TablePaginationActionsProps {
    count: number;
@@ -111,11 +113,12 @@ export const TransactionTable = () => {
    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
    const transactions = useGlobalStore((state) => state.transactions);
+
    const navigate = useNavigate();
    // Avoid a layout jump when reaching the last page with empty rows.
    const emptyRows =
       page > 0
-         ? Math.max(0, (1 + page) * rowsPerPage - transactions.length)
+         ? Math.max(0, (1 + page) * rowsPerPage - transactions!.length)
          : 0;
 
    const handleChangePage = (
@@ -145,6 +148,15 @@ export const TransactionTable = () => {
                      }}
                   >
                      Transfer Description
+                  </TableCell>
+                  <TableCell
+                     sx={{
+                        fontSize: "1.25rem",
+                        fontWeight: 700,
+                        color: "#ffffff",
+                     }}
+                  >
+                     Category
                   </TableCell>
                   <TableCell
                      sx={{
@@ -190,12 +202,12 @@ export const TransactionTable = () => {
             </TableHead>
             <TableBody>
                {(rowsPerPage > 0
-                  ? transactions.slice(
+                  ? transactions!.slice(
                        page * rowsPerPage,
                        page * rowsPerPage + rowsPerPage
                     )
-                  : transactions
-               ).map((transaction) => (
+                  : transactions!
+               ).map((transaction: Transaction) => (
                   <TableRow
                      key={transaction.id}
                      onClick={() => navigate(`/transactions/${transaction.id}`)}
@@ -212,6 +224,18 @@ export const TransactionTable = () => {
                         scope="row"
                      >
                         {transaction.description}
+                     </TableCell>
+                     <TableCell
+                        sx={{
+                           fontSize: "1rem",
+                           fontWeight: 600,
+                           color: "#ffffff",
+                        }}
+                        className="border-2 transition-all border-gray-900"
+                        component="th"
+                        scope="row"
+                     >
+                        {capitalizeString(transaction.category!)}
                      </TableCell>
                      <TableCell
                         sx={{
@@ -292,7 +316,7 @@ export const TransactionTable = () => {
                         { label: "All", value: -1 },
                      ]}
                      colSpan={0}
-                     count={transactions.length}
+                     count={transactions!.length}
                      rowsPerPage={rowsPerPage}
                      page={page}
                      SelectProps={{

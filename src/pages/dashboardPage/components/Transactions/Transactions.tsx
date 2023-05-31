@@ -17,7 +17,7 @@ export const Transactions = () => {
             </Link>
          </div>
          <ul>
-            {transactions.map((transaction: Transaction, id: number) => {
+            {transactions!.map((transaction: Transaction, id: number) => {
                if (id < 8)
                   return (
                      <li key={transaction.id}>
