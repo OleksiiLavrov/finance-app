@@ -1,0 +1,36 @@
+.cards_wrapper {
+   position: relative;
+   height: 260px;
+}
+.cards_item {
+   cursor: pointer;
+   position: absolute;
+   width: 100%;
+   left: 0;
+   transition: 0.3s all ease-in-out;
+   transform: rotate(0) translateX(0);
+   transform-origin: center right;
+}
+.cards_item:first-child {
+   z-index: 10;
+}
+.cards_item:nth-child(2) {
+   z-index: 8;
+}
+.cards_wrapper:hover .cards_item:first-child {
+   transform: rotate(16deg);
+}
+.cards_wrapper:hover .cards_item:nth-child(2) {
+   transform: rotate(-16deg);
+}
+.cards_item:hover {
+   transition: 0.3s all ease-in-out;
+   /* transform: rotateX(180deg); */
+}
+
+/* animation: rotate 5s infinite; */
+@keyframes rotate {
+   50% {
+      transform: rotateX(0deg);
+   }
+}

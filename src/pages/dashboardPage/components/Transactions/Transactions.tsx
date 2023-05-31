@@ -6,8 +6,8 @@ import { Transaction } from "../../../../types/globalTypes";
 export const Transactions = () => {
    const transactions = useGlobalStore((state) => state.transactions);
    return (
-      <div className="bg-gray-800 rounded-lg px-10 py-6 w-full">
-         <div className="flex justify-between items-center mb-7">
+      <div className="bg-gray-800 rounded-lg py-6 w-full">
+         <div className="flex justify-between items-center mb-7 px-10">
             <h3 className="text-2xl font-semibold">Recent Transactions</h3>
             <Link
                to="/transactions"
@@ -21,7 +21,9 @@ export const Transactions = () => {
                if (id < 8)
                   return (
                      <li key={transaction.id}>
-                        <TransactionsItem transaction={transaction} />
+                        <Link to={`/transactions/${transaction.id}`}>
+                           <TransactionsItem transaction={transaction} />
+                        </Link>
                      </li>
                   );
             })}

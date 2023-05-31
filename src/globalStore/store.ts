@@ -8,10 +8,11 @@ interface IGlobalStore {
    loading: boolean;
    transactions: Transaction[];
    getInfo: () => void;
+   getTransactions: () => void;
 }
 
 export const useGlobalStore = create<IGlobalStore>()(
-   immer((set) => ({
+   immer((set, get) => ({
       clientInfo: null,
       loading: true,
       transactions: [],
@@ -19,10 +20,20 @@ export const useGlobalStore = create<IGlobalStore>()(
       getInfo: async () => {
          set({ loading: true });
          try {
-            const monthAgo = new Date().setDate(new Date().getDate() - 30);
             const clientInfoRes = await clientService.getClientInfo();
+            set({ clientInfo: clientInfoRes });
+            get().getTransactions();
+         } catch (error) {
+            set({ loading: false });
+         }
+      },
+
+      getTransactions: async () => {
+         set({ loading: true });
+         try {
+            const monthAgo = new Date().setDate(new Date().getDate() - 30);
             const requestArgs = {
-               id: clientInfoRes.accounts[0].id,
+               id: get().clientInfo!.accounts[0].id,
                timeFrom: monthAgo,
                timeTo: Date.now(),
             };
@@ -30,7 +41,6 @@ export const useGlobalStore = create<IGlobalStore>()(
                requestArgs
             );
             set({
-               clientInfo: clientInfoRes,
                transactions: transactionsRes,
                loading: false,
             });

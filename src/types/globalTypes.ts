@@ -41,6 +41,7 @@ export type Transaction = {
    originalMcc: number;
    operationAmount: number;
    time: number;
+   category?: string;
 };
 
 export type ChartInfo = {
