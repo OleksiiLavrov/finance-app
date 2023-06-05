@@ -1,7 +1,7 @@
 import { useInitialStore } from "../../../../globalStore/initialStore";
 import { useGlobalStore } from "../../../../globalStore/store";
 import { TabsItem } from "../../ui";
-import { countAmount } from "../../utils/countAmount";
+import { countAmount } from "../../helpers/countAmount";
 
 export const Tabs = () => {
    const clientInfo = useInitialStore((state) => state.clientInfo);

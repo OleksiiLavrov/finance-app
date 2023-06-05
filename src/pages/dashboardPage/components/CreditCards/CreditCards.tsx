@@ -1,6 +1,6 @@
 import "./index.css";
 import { CreditCardsItem } from "../../ui";
-import { countAmount } from "../../utils/countAmount";
+import { countAmount } from "../../helpers/countAmount";
 import { useInitialStore } from "../../../../globalStore/initialStore";
 
 export const CreditCards = () => {

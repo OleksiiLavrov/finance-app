@@ -136,71 +136,27 @@ export const TransactionTable = () => {
    };
 
    return (
-      <TableContainer component={Paper}>
-         <Table sx={{ minWidth: 500 }} aria-label="table">
-            <TableHead className="bg-gray-800 border-2 border-gray-900">
-               <TableRow>
-                  <TableCell
-                     sx={{
-                        fontSize: "1.25rem",
-                        fontWeight: 700,
-                        color: "#ffffff",
-                     }}
-                  >
-                     Transfer Description
-                  </TableCell>
-                  <TableCell
-                     sx={{
-                        fontSize: "1.25rem",
-                        fontWeight: 700,
-                        color: "#ffffff",
-                     }}
-                  >
-                     Category
-                  </TableCell>
-                  <TableCell
-                     sx={{
-                        fontSize: "1.25rem",
-                        fontWeight: 700,
-                        color: "#ffffff",
-                     }}
-                     align="right"
-                  >
-                     Amount
-                  </TableCell>
-                  <TableCell
-                     sx={{
-                        fontSize: "1.25rem",
-                        fontWeight: 700,
-                        color: "#ffffff",
-                     }}
-                     align="right"
-                  >
-                     Balance
-                  </TableCell>
-                  <TableCell
-                     sx={{
-                        fontSize: "1.25rem",
-                        fontWeight: 700,
-                        color: "#ffffff",
-                     }}
-                     align="right"
-                  >
-                     Date
-                  </TableCell>
-                  <TableCell
-                     sx={{
-                        fontSize: "1.25rem",
-                        fontWeight: 700,
-                        color: "#ffffff",
-                     }}
-                     align="right"
-                  >
-                     Payment id
-                  </TableCell>
-               </TableRow>
-            </TableHead>
-            <TableBody>
+      <div>
+         <div className="w-full border-2 border-gray-900">
+            <div className="bg-gray-800 flex justify-between w-full">
+               <p className="w-3/12 text-white text-2xl font-bold p-3">
+                  Transfer Description
+               </p>
+               <p className="w-2/12 text-white text-2xl font-bold p-3">
+                  Category
+               </p>
+               <p className="w-2/12 text-white text-2xl font-bold p-3">
+                  Amount
+               </p>
+               <p className="w-2/12 text-white text-2xl font-bold p-3">
+                  Balance
+               </p>
+               <p className="w-1/12 text-white text-2xl font-bold p-3">Date</p>
+               <p className="w-2/12 text-white text-2xl font-bold p-3">
+                  Payment id
+               </p>
+            </div>
+            <ul>
                {(rowsPerPage > 0
                   ? transactions!.slice(
                        page * rowsPerPage,
@@ -208,45 +164,24 @@ export const TransactionTable = () => {
                     )
                   : transactions!
                ).map((transaction: Transaction) => (
-                  <TableRow
+                  <li
                      key={transaction.id}
                      onClick={() => navigate(`/transactions/${transaction.id}`)}
-                     className="bg-gray-700 duration-300 hover:bg-gray-800 cursor-pointer"
+                     className="bg-gray-700 duration-300 hover:bg-gray-800 cursor-pointer flex justify-between"
                   >
-                     <TableCell
-                        sx={{
-                           fontSize: "1rem",
-                           fontWeight: 600,
-                           color: "#ffffff",
-                        }}
-                        className="border-2 transition-all border-gray-900"
-                        component="th"
-                        scope="row"
-                     >
+                     <div className="border-2 border-gray-900 w-3/12 text-white text-lg font-semibold p-3 overflow-hidden whitespace-nowrap">
                         {transaction.description}
-                     </TableCell>
-                     <TableCell
-                        sx={{
-                           fontSize: "1rem",
-                           fontWeight: 600,
-                           color: "#ffffff",
-                        }}
-                        className="border-2 transition-all border-gray-900"
-                        component="th"
-                        scope="row"
-                     >
+                     </div>
+                     <div className="border-2 border-gray-900 w-2/12 text-white text-lg font-semibold p-3">
                         {capitalizeString(transaction.category!)}
-                     </TableCell>
-                     <TableCell
-                        sx={{
-                           fontSize: "1rem",
-                           fontWeight: 600,
-                           color:
-                              transaction.amount > 0 ? "#22c55e" : "#ef4444",
-                        }}
-                        className="border-2 border-gray-900"
-                        style={{ width: 160 }}
-                        align="right"
+                     </div>
+                     <div
+                        className={`border-2 border-gray-900 w-2/12 ${
+                           transaction.amount > 0
+                              ? "text-green-500"
+                              : "text-red-500"
+                        }
+                         text-lg font-semibold p-3`}
                      >
                         {transaction.amount > 0
                            ? `+${convertAmount(
@@ -254,61 +189,29 @@ export const TransactionTable = () => {
                              ).toLocaleString()}`
                            : convertAmount(transaction.amount).toLocaleString()}
                         ₴
-                     </TableCell>
-                     <TableCell
-                        sx={{
-                           fontSize: "1rem",
-                           fontWeight: 600,
-                           color: "#ffffff",
-                        }}
-                        className="border-2 border-gray-900"
-                        style={{ width: 160 }}
-                        align="right"
-                     >
+                     </div>
+                     <div className="border-2 border-gray-900 w-2/12 text-white text-lg font-semibold p-3">
                         {convertAmount(transaction.balance).toLocaleString()}₴
-                     </TableCell>
-                     <TableCell
-                        sx={{
-                           fontSize: "1rem",
-                           fontWeight: 600,
-                           color: "#ffffff",
-                        }}
-                        className="border-2 border-gray-900"
-                        style={{ width: 160 }}
-                        align="right"
-                     >
+                     </div>
+                     <div className="border-2 border-gray-900 w-1/12 text-white text-lg font-semibold p-3">
                         {timeConverter(transaction.time).day}
-                     </TableCell>
-                     <TableCell
-                        sx={{
-                           fontSize: "1rem",
-                           fontWeight: 600,
-                           color: "#ffffff",
-                        }}
-                        className="border-2 border-gray-900"
-                        style={{ width: 160 }}
-                        align="right"
-                     >
+                     </div>
+                     <div className="border-2 border-gray-900 w-2/12 text-white text-lg font-semibold p-3 overflow-hidden whitespace-nowrap">
                         {transaction.id}
-                     </TableCell>
-                  </TableRow>
+                     </div>
+                  </li>
                ))}
                {emptyRows > 0 && (
-                  <TableRow
-                     style={{ height: 53 * emptyRows }}
-                     className="bg-gray-700"
-                  >
-                     <TableCell
-                        className="border-2 border-gray-900"
-                        colSpan={6}
-                     />
-                  </TableRow>
+                  <div
+                     style={{ height: 54.2 * emptyRows }}
+                     className="bg-gray-700 border-2 border-gray-900"
+                  ></div>
                )}
-            </TableBody>
-            <TableFooter className="bg-gray-800 border-2 border-gray-900">
-               <TableRow>
+            </ul>
+            <div className="bg-gray-800 border-2 border-gray-900 w-full">
+               <div>
                   <TablePagination
-                     sx={{ color: "#ffffff" }}
+                     sx={{ color: "#ffffff", border: "none" }}
                      rowsPerPageOptions={[
                         10,
                         20,
@@ -329,9 +232,9 @@ export const TransactionTable = () => {
                      onRowsPerPageChange={handleChangeRowsPerPage}
                      ActionsComponent={TablePaginationActions}
                   />
-               </TableRow>
-            </TableFooter>
-         </Table>
-      </TableContainer>
+               </div>
+            </div>
+         </div>
+      </div>
    );
 };
