@@ -13,9 +13,8 @@ export const categoriesSetter = (
       for (const key in categories) {
          categories[key].map((descr: string) => {
             if (
-               updatedTransaction.description
-                  .toLowerCase()
-                  .includes(descr.toLowerCase())
+               updatedTransaction.description.toLowerCase() ===
+               descr.toLowerCase()
             ) {
                updatedTransaction.category = key;
             }

@@ -11,28 +11,23 @@ interface IStore {
 }
 
 export const useChartStore = create<IStore>()(
-   devtools(
-      immer((set, get) => ({
-         columnChartInfo: {
-            name: "Total Income Per Day",
-            yAxis: [],
-            xAxis: [],
-         },
-         setInfo: (period) => {
-            const transactions = useGlobalStore.getState().transactions;
-            const { arrTotal, arrDate } = totalIncomePerDay(
-               transactions!,
-               period
-            );
-            set((state) => ({
-               columnChartInfo: {
-                  name: state.columnChartInfo.name,
-                  yAxis: arrTotal,
-                  xAxis: arrDate,
-               },
-            }));
-            return get().columnChartInfo;
-         },
-      }))
-   )
+   immer((set, get) => ({
+      columnChartInfo: {
+         name: "Total Income Per Day",
+         yAxis: [],
+         xAxis: [],
+      },
+      setInfo: (period) => {
+         const transactions = useGlobalStore.getState().transactions;
+         const { arrTotal, arrDate } = totalIncomePerDay(transactions!, period);
+         set((state) => ({
+            columnChartInfo: {
+               name: state.columnChartInfo.name,
+               yAxis: arrTotal,
+               xAxis: arrDate,
+            },
+         }));
+         return get().columnChartInfo;
+      },
+   }))
 );

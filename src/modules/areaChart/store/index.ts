@@ -11,28 +11,23 @@ interface IStore {
 }
 
 export const useChartStore = create<IStore>()(
-   devtools(
-      immer((set, get) => ({
-         areaChartInfo: {
-            name: "Balance",
-            yAxis: [],
-            xAxis: [],
-         },
-         setInfo: (period) => {
-            const transactions = useGlobalStore.getState().transactions;
-            const { arrBalance, arrDate } = balancePerDay(
-               transactions!,
-               period
-            );
-            set((state) => ({
-               areaChartInfo: {
-                  name: state.areaChartInfo.name,
-                  yAxis: arrBalance,
-                  xAxis: arrDate,
-               },
-            }));
-            return get().areaChartInfo;
-         },
-      }))
-   )
+   immer((set, get) => ({
+      areaChartInfo: {
+         name: "Balance",
+         yAxis: [],
+         xAxis: [],
+      },
+      setInfo: (period) => {
+         const transactions = useGlobalStore.getState().transactions;
+         const { arrBalance, arrDate } = balancePerDay(transactions!, period);
+         set((state) => ({
+            areaChartInfo: {
+               name: state.areaChartInfo.name,
+               yAxis: arrBalance,
+               xAxis: arrDate,
+            },
+         }));
+         return get().areaChartInfo;
+      },
+   }))
 );

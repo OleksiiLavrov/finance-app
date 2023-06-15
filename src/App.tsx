@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "./modules";
+import { Sidebar } from "modules";
 import { ErrorBoundary } from "react-error-boundary";
-import { ErrorComponent } from "./ui/Error/Error";
+import { ErrorComponent } from "ui/Error/Error";
 import { useEffect } from "react";
-import { useInitialStore } from "./globalStore/initialStore";
+import { useInitialStore } from "globalStore/initialStore";
 
 export const App = () => {
    const getInfo = useInitialStore((state) => state.getInfo);

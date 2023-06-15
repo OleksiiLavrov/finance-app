@@ -3,6 +3,7 @@ import { immer } from "zustand/middleware/immer";
 import { ClientInfo, Transaction } from "../types/globalTypes";
 import { clientService } from "../http/services/clientService";
 import { useGlobalStore } from "./store";
+import { devtools } from "zustand/middleware";
 
 interface IInitialStore {
    clientInfo: ClientInfo | null;
@@ -42,7 +43,6 @@ export const useInitialStore = create<IInitialStore>()(
                requestArgs
             );
             useGlobalStore.getState().getTransactions(transactionsRes);
-
             set({
                transactions: transactionsRes,
                loading: false,
